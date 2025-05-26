@@ -8,6 +8,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Game/StartMenu.unity
+    guid: 3b148d599f3f5af40bcc7621000bf3d2
+  - enabled: 1
+    path: Assets/Scenes/Game/GameOverMenu.unity
+    guid: e2f4b6c026662974491ffc1d7ceeb13e
+  - enabled: 1
+    path: Assets/Scenes/Game/Tutorial.unity
+    guid: 7defbc280c59f974a99dbe5ca03b75b7
+  - enabled: 1
+    path: Assets/Scenes/Game/Level2.unity
+    guid: 1297d8802fbc56046997dfcb70ef712a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 896582cafd8c2d44eada9a54ea2e5a23, type: 2}

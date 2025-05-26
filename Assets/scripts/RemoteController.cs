@@ -1,15 +1,10 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
 using UnityEngine.Video;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
-using UnityEngine.UIElements;
 
 public class RemoteController : MonoBehaviour
 {
     public GameObject[] colorChangingObjects;  // Objects to change color
-    public InputActionReference buttonPressAction; // Assign in Inspector
     public Color pressColor = Color.red;
     public float colorDuration = 0.5f;
 
@@ -18,16 +13,19 @@ public class RemoteController : MonoBehaviour
     private bool isTVOn = false;
 
     private Dictionary<Renderer, Color> originalColors = new Dictionary<Renderer, Color>();
-    private bool isHeld = false;
-    private XRGrabInteractable grabInteractable;
 
     public Material tvOnMaterial;  // Assign an unlit material
     public Material tvOffMaterial; // Assign a black or dark material
+    public List<GameObject> tvLights;
 
     private Renderer tvRenderer;
 
     void Start()
     {
+        foreach (var light in tvLights)
+        {
+            light.SetActive(false);
+        }
         // Store original colors of each object
         foreach (GameObject obj in colorChangingObjects)
         {
@@ -50,36 +48,10 @@ public class RemoteController : MonoBehaviour
             if (tvRenderer != null && tvOffMaterial != null)
                 tvRenderer.material = tvOffMaterial; // Start with TV off material
         }
-
-        grabInteractable = GetComponent<XRGrabInteractable>();
-
-        // Subscribe to grab events
-        grabInteractable.selectEntered.AddListener(OnGrab);
-        grabInteractable.selectExited.AddListener(OnRelease);
     }
 
-    void OnDestroy()
+    public void OnButtonPress()
     {
-        grabInteractable.selectEntered.RemoveListener(OnGrab);
-        grabInteractable.selectExited.RemoveListener(OnRelease);
-    }
-
-    void OnGrab(SelectEnterEventArgs args)
-    {
-        isHeld = true;
-        buttonPressAction.action.performed += OnButtonPress;
-    }
-
-    void OnRelease(SelectExitEventArgs args)
-    {
-        isHeld = false;
-        buttonPressAction.action.performed -= OnButtonPress;
-    }
-
-    void OnButtonPress(InputAction.CallbackContext context)
-    {
-        if (!isHeld) return;
-
         // Change object colors
         foreach (GameObject obj in colorChangingObjects)
         {
@@ -113,11 +85,19 @@ public class RemoteController : MonoBehaviour
         if (isTVOn)
         {
             tvRenderer.material = tvOnMaterial; // Apply the unlit material
+            foreach (var light in tvLights)
+            {
+                light.SetActive(true);
+            }
             videoPlayer.Play();
         }
         else
         {
             tvRenderer.material = tvOffMaterial; // Apply the dark material
+            foreach (var light in tvLights)
+            {
+                light.SetActive(false);
+            }
             videoPlayer.Stop();
         }
     }
