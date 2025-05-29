@@ -1,0 +1,29 @@
+{
+    "StatueAgent": {
+        "checkpoints": [
+            {
+                "steps": 424665,
+                "file_path": "results\\StatueAgentTest\\StatueAgent\\StatueAgent-424665.onnx",
+                "reward": 11.78142865693995,
+                "creation_time": 1748556229.671534,
+                "auxillary_file_paths": [
+                    "results\\StatueAgentTest\\StatueAgent\\StatueAgent-424665.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 424665,
+            "file_path": "results\\StatueAgentTest\\StatueAgent.onnx",
+            "reward": 11.78142865693995,
+            "creation_time": 1748556229.671534,
+            "auxillary_file_paths": [
+                "results\\StatueAgentTest\\StatueAgent\\StatueAgent-424665.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
