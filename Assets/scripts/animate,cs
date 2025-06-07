@@ -1,0 +1,107 @@
+using UnityEngine;
+using System.Collections; // Required for Coroutines
+
+public class AngelController : MonoBehaviour
+{
+    private Animator animator;
+
+    [Header("Detection Settings")]
+    public float detectionRadius = 5f; // How far the angel detects players
+    public LayerMask playerLayer;      // Set this in the Inspector to your player's layer
+
+    [Header("Attack Settings")]
+    public float attackDelay = 1f;     // Delay before the "Attack" animation triggers
+    public float returnToIdleDelay = 2f; // Time before returning to Idle after player leaves (or after attack finishes)
+
+    private bool playerIsSeen = false;
+    private Coroutine attackCoroutine; // To manage the attack delay coroutine
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator not found on " + gameObject.name);
+            enabled = false; // Disable script if no animator
+        }
+    }
+
+    void Update()
+    {
+        // Check for player detection
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius, playerLayer);
+        bool currentlySeeingPlayer = hitColliders.Length > 0;
+
+        if (currentlySeeingPlayer && !playerIsSeen)
+        {
+            // Player just entered detection range
+            playerIsSeen = true;
+            OnPlayerDetected();
+        }
+        else if (!currentlySeeingPlayer && playerIsSeen)
+        {
+            // Player just left detection range
+            playerIsSeen = false;
+            OnPlayerLost();
+        }
+    }
+
+    void OnPlayerDetected()
+    {
+        Debug.Log("Player Detected! Starting wipe animation.");
+        animator.SetBool("PlayerSeen", true); // Trigger the "WipeUp" animation
+        
+        // Start the attack delay coroutine if not already running
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+        }
+        attackCoroutine = StartCoroutine(AttackAfterDelay());
+    }
+
+    void OnPlayerLost()
+    {
+        Debug.Log("Player Lost! Returning to Idle.");
+        // Stop any pending attacks if player leaves
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+        }
+
+        animator.SetBool("PlayerSeen", false); // Signal to return from wiping
+        
+        // You might want a small delay before fully returning to idle
+        // if your "wiping down" animation takes time.
+        // For simplicity, we'll let Animator transitions handle the "BackToIdle"
+        // or trigger it when the "WipeDown" animation finishes.
+        // For now, let the Animator's "PlayerSeen" false transition handle it.
+    }
+
+    IEnumerator AttackAfterDelay()
+    {
+        yield return new WaitForSeconds(attackDelay);
+        if (playerIsSeen) // Only attack if player is still seen
+        {
+            Debug.Log("Attacking!");
+            animator.SetTrigger("Attack"); // Trigger the attack animation
+        }
+        attackCoroutine = null; // Clear the coroutine reference
+    }
+
+    // Optional: Draw detection radius in editor
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    }
+
+    // You can call this method from an Animation Event at the end of your "Attack" animation
+    public void OnAttackAnimationFinished()
+    {
+        Debug.Log("Attack animation finished.");
+        // If you want to force a return to idle after attack, regardless of player detection:
+        // animator.SetBool("PlayerSeen", false); 
+        // animator.SetBool("BackToIdle", true); // If you have a separate "BackToIdle" bool
+    }
+}

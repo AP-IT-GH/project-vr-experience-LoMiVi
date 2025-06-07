@@ -1,0 +1,47 @@
+{
+    "StatueAgent": {
+        "checkpoints": [
+            {
+                "steps": 499950,
+                "file_path": "results\\StatueAgent_Training_001\\StatueAgent\\StatueAgent-499950.onnx",
+                "reward": null,
+                "creation_time": 1749310507.1722798,
+                "auxillary_file_paths": [
+                    "results\\StatueAgent_Training_001\\StatueAgent\\StatueAgent-499950.pt"
+                ]
+            },
+            {
+                "steps": 999943,
+                "file_path": "results\\StatueAgent_Training_001\\StatueAgent\\StatueAgent-999943.onnx",
+                "reward": 12.39800017029047,
+                "creation_time": 1749315360.2316577,
+                "auxillary_file_paths": [
+                    "results\\StatueAgent_Training_001\\StatueAgent\\StatueAgent-999943.pt"
+                ]
+            },
+            {
+                "steps": 1111508,
+                "file_path": "results\\StatueAgent_Training_001\\StatueAgent\\StatueAgent-1111508.onnx",
+                "reward": 10.830000036706528,
+                "creation_time": 1749316487.593298,
+                "auxillary_file_paths": [
+                    "results\\StatueAgent_Training_001\\StatueAgent\\StatueAgent-1111508.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1111508,
+            "file_path": "results\\StatueAgent_Training_001\\StatueAgent.onnx",
+            "reward": 10.830000036706528,
+            "creation_time": 1749316487.593298,
+            "auxillary_file_paths": [
+                "results\\StatueAgent_Training_001\\StatueAgent\\StatueAgent-1111508.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.1.0+cpu"
+    }
+}
