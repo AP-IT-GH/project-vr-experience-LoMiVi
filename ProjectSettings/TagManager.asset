@@ -9,6 +9,7 @@ TagManager:
   - playerBody
   - marker
   - enemy
+  - blockAgentWall
   layers:
   - Default
   - TransparentFX
