@@ -18,7 +18,12 @@ public class StatueAgent : Agent
     private Vector3 startPosition;
     private Quaternion startRotation;
     private HashSet<Vector2Int> visitedPositions = new HashSet<Vector2Int>();
+
     private bool isFrozen = false;
+    public int AttackChangeDistance = 3;
+    public GameObject angelIdle;
+    public GameObject angelAttack;
+    public Transform player;
 
     private void Start()
     {
@@ -129,11 +134,18 @@ public class StatueAgent : Agent
 
     public void FreezeMovement()
     {
+        if (!isFrozen && Vector3.Distance(transform.position, player.position) <= AttackChangeDistance)
+        {
+            angelAttack.SetActive(true);
+            angelIdle.SetActive(false);
+        }
         isFrozen = true;
     }
 
     public void UnfreezeMovement()
     {
+        angelAttack.SetActive(false);
+        angelIdle.SetActive(true);
         isFrozen = false;
     }
 }
