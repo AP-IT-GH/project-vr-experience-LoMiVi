@@ -1,5 +1,7 @@
 # Haunted Escape: VR Edition
 
+Door: Vislan, Lowie, Stanley, Milan
+
 ## Inleiding
 
 Een immersieve VR experience waarin AI-gestuurde standbeelden actief de speler zoekt terwijl die een uitweg zoekt uit een mysterieuze omgeving.
@@ -131,3 +133,10 @@ Wat we vooral gezien hebben is dat de agent redelijk snel leert om de speler te 
 Persoonlijk vinden we dat de resultaten laten zien dat een AI-agent heel goed bruikbaar is voor dit soort vijand-gedrag. Het feit dat je het standbeeld nooit op exact dezelfde manier ziet bewegen doorheen het gebouw maakt het spel veel spannender en minder voorspelbaar.
 
 Voor de toekomst zou het zeker interessant zijn om meerdere standbeelden tegelijk te gebruiken en te kijken of we ze dan kunnen laten samenwerken om nog sneller de speler te vinden. Ook zou het handig kunnen zijn om het kijkmechanisme misschien toch gedeeltelijk mee te nemen in de training, zodat het gedrag nog beter aansluit bij de gameplay. Verder zou het toevoegen van geluid waarbij de agent dan de speler hoort aankomen ook nog iets zijn dat de game naar een hoger niveau zou kunnen tillen.
+
+## Referenties
+
+-	Peeters, Tom (2022), mlagents_2223-deel1 , AP Hogeschool.
+-	Peeters, Tom (2022), mlagents, AP Hogeschool.
+
+
