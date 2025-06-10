@@ -1,5 +1,7 @@
 # Haunted Escape: VR Edition
 
+Door: Vislan, Lowie, Stanley, Milan
+
 ## Inleiding
 
 Een immersieve VR experience waarin AI-gestuurde standbeelden actief de speler zoekt terwijl die een uitweg zoekt uit een mysterieuze omgeving.
@@ -17,6 +19,34 @@ In dit document leer je hoe wij een AI-aangedreven VR-project opgezet hebben waa
     - Torch: **1.7.1**
     - Protobuf: **3.20.\***
     - Mlagents: **0.30.0**
+
+**Setup**
+
+(Voor de training van de agent is een Python-omgeving nodig. Hiervoor is Anaconda al geinstalleerd te zijn.)
+
+1. Maak een nieuwe omgeving aan in Anaconda prompt en installeer in deze nieuwe omgeving de ML-Agents package:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;conda create --name mlagents python=3.9.18
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;conda activate mlagents
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pip3 install torch~=1.7.1 -f <https://download.pytorch.org/whl/torch_stable.html>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pip install protobuf==3.20.\*
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python -m pip install mlagents==0.30.0
+
+(Voor het trainen van de agent is een configuratiebestand vereist.)
+
+2. Maak een yaml bestand aan en noem deze Agent.yaml, plaats vervolgens deze bestand in de config folder van je project.
+
+(De Unity Scene is al opgezet, zie hiervoor de git repo)
+
+3. Start de training door op in de Anaconda prompt deze commando uit te voeren (vervolgens druk je op Play in de Unity Editor):
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mlagents-learn config/Agent.yaml --force --run-id=Agent
+
+(Ten slotte kan je ook de trainingprogressie visueel weergeven door de command ''tensorboard --logdir results'' in een nieuwe prompt)
 
 ### Verloop van het spel
 
@@ -131,3 +161,10 @@ Wat we vooral gezien hebben is dat de agent redelijk snel leert om de speler te 
 Persoonlijk vinden we dat de resultaten laten zien dat een AI-agent heel goed bruikbaar is voor dit soort vijand-gedrag. Het feit dat je het standbeeld nooit op exact dezelfde manier ziet bewegen doorheen het gebouw maakt het spel veel spannender en minder voorspelbaar.
 
 Voor de toekomst zou het zeker interessant zijn om meerdere standbeelden tegelijk te gebruiken en te kijken of we ze dan kunnen laten samenwerken om nog sneller de speler te vinden. Ook zou het handig kunnen zijn om het kijkmechanisme misschien toch gedeeltelijk mee te nemen in de training, zodat het gedrag nog beter aansluit bij de gameplay. Verder zou het toevoegen van geluid waarbij de agent dan de speler hoort aankomen ook nog iets zijn dat de game naar een hoger niveau zou kunnen tillen.
+
+## Referenties
+
+-	Peeters, Tom (2022), mlagents_2223-deel1 , AP Hogeschool.
+-	Peeters, Tom (2022), mlagents, AP Hogeschool.
+
+
